@@ -5,7 +5,7 @@ import "../assets/scss/sign-in.scss";
 import FormInput from "./partials/form-input";
 import Button from "./partials/button";
 
-import { signInWithGoogle } from "../firebase/init";
+import { signInWithGoogle, auth } from "../firebase/init";
 
 class SignIn extends Component {
   constructor(props) {
@@ -14,10 +14,15 @@ class SignIn extends Component {
     this.state = { email: "", password: "" };
   }
 
-  handleSubmit = (e) => {
+  handleSubmit = async (e) => {
     e.preventDefault();
-
-    this.setState({ email: "", password: "" });
+    const { email, password } = this.state;
+    try {
+      await auth.signInWithEmailAndPassword(email, password);
+      this.setState({ email: "", password: "" });
+    } catch (err) {
+      console.log("failed to sign in", err.message);
+    }
   };
 
   handleChange = (e) => {

@@ -6,11 +6,11 @@ import { auth, createUserProfileDocument } from "../firebase/init";
 import "../assets/scss/sign-up.scss";
 
 class SignUp extends Component {
-  state = { name: "", email: "", password: "", confirmPassword: "" };
+  state = { displayName: "", email: "", password: "", confirmPassword: "" };
 
   handleSubmit = async (event) => {
     event.preventDefault();
-    const { name, email, password, confirmPassword } = this.state;
+    const { displayName, email, password, confirmPassword } = this.state;
 
     if (password !== confirmPassword) {
       alert("password don't match");
@@ -23,9 +23,14 @@ class SignUp extends Component {
         password
       );
 
-      await createUserProfileDocument(user, { name });
+      await createUserProfileDocument(user, { displayName });
 
-      this.setState({ name: "", email: "", password: "", confirmPassword: "" });
+      this.setState({
+        displayName: "",
+        email: "",
+        password: "",
+        confirmPassword: "",
+      });
     } catch (err) {
       console.log(err);
     }
@@ -38,7 +43,7 @@ class SignUp extends Component {
   };
 
   render() {
-    const { name, email, password, confirmPassword } = this.state;
+    const { displayName, email, password, confirmPassword } = this.state;
 
     return (
       <div className="sign-up">
@@ -47,10 +52,10 @@ class SignUp extends Component {
         <form onSubmit={this.handleSubmit} className="sign-up-form">
           <FormInput
             type="text"
-            name="name"
-            value={name}
+            name="displayName"
+            value={displayName}
             handleChange={this.handleChange}
-            label="Name"
+            label="Display Name"
             required
           />
 
