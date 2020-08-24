@@ -5,6 +5,8 @@ import "../assets/scss/sign-in.scss";
 import FormInput from "./partials/form-input";
 import Button from "./partials/button";
 
+import { signInWithGoogle } from "../firebase/init";
+
 class SignIn extends Component {
   constructor(props) {
     super(props);
@@ -19,7 +21,7 @@ class SignIn extends Component {
   };
 
   handleChange = (e) => {
-    const { value, name } = e.target;
+    const { name, value } = e.target;
 
     this.setState({ [name]: value });
   };
@@ -32,7 +34,7 @@ class SignIn extends Component {
 
         <form onSubmit={this.handleSubmit} autoComplete="off">
           <FormInput
-            type="text"
+            type="email"
             name="email"
             required
             value={this.state.email}
@@ -49,9 +51,15 @@ class SignIn extends Component {
             value={this.state.password}
           />
 
-          <Button type="submit" value="Submit Form">
-            Sign in
-          </Button>
+          <div className="buttons">
+            <Button type="submit" value="Submit Form">
+              Sign in
+            </Button>
+
+            <Button onClick={signInWithGoogle} isGoogleSignIn>
+              SIGN IN WITH GOOGLE
+            </Button>
+          </div>
         </form>
       </div>
     );
