@@ -10,6 +10,8 @@ import AuthenticationPage from "./views/authentication";
 import Header from "./components/partials/header";
 import { auth, createUserProfileDocument } from "./firebase/init";
 import { setCurrentUser } from "./store/users/userActions";
+import { createStructuredSelector } from "reselect";
+import { selectCurrentUser } from "./store/users/userSelectors";
 
 class App extends Component {
   unsubscribeFromAuth = null;
@@ -63,8 +65,8 @@ const mapDispatchToProps = (dispatch) => ({
   setCurrentUser: (user) => dispatch(setCurrentUser(user)),
 });
 
-const mapStateToProps = ({ user }) => ({
-  currentUser: user.currentUser,
+const mapStateToProps = createStructuredSelector({
+  currentUser: selectCurrentUser,
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);
