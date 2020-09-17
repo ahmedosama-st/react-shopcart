@@ -8,6 +8,8 @@ import HomePage from "./views/homepage";
 import ShopPage from "./views/shop";
 import AuthenticationPage from "./views/authentication";
 import Header from "./components/partials/header";
+import CheckoutPage from "./views/checkout";
+
 import { auth, createUserProfileDocument } from "./firebase/init";
 import { setCurrentUser } from "./store/users/userActions";
 import { createStructuredSelector } from "reselect";
@@ -44,6 +46,7 @@ class App extends Component {
         <Switch>
           <Route path="/" component={HomePage} exact />
           <Route path="/shop" component={ShopPage} />
+          <Route exact path="/checkout" component={CheckoutPage} />
           <Route
             exact
             path="/auth"
