@@ -8,3 +8,8 @@ export const addItem = (item) => ({
   type: cartTypes.itemWasAdded,
   payload: item,
 });
+
+export const clearItemFromCart = (item) => ({
+  type: cartTypes.itemWasClearedFromCart,
+  payload: item,
+});
